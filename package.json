@@ -2,7 +2,7 @@
   "name": "test_environment",
   "version": "0.1.0",
   "private": true,
-  "homepage": ".",
+  "homepage": "https://tung2389.github.io/authentication_with_session",
   "dependencies": {
     "@material-ui/core": "^3.9.1",
     "react": "^16.7.0",
