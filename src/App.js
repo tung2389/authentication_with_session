@@ -200,13 +200,13 @@ class Home extends React.Component{
   render(){
     return(
       <div>
-        <Link to = {process.env.PUBLIC_URL + "/login"}><Button variant = "contained">LOG IN</Button></Link>
+        <Link to = "/login"><Button variant = "contained">LOG IN</Button></Link>
         <br/>
         <br/>
-        <Link to = {process.env.PUBLIC_URL + "/sign_up"}><Button variant = "contained">SIGN UP</Button></Link>
+        <Link to = "/sign_up"><Button variant = "contained">SIGN UP</Button></Link>
         <br/>
         <br/>
-        <Link to = {process.env.PUBLIC_URL + "/profile"}><Button variant = "contained">PROFILE</Button></Link>
+        <Link to = "/profile"><Button variant = "contained">PROFILE</Button></Link>
       </div>
     );
   }
@@ -214,13 +214,13 @@ class Home extends React.Component{
 class App extends React.Component{
   render(){
     return(
-      <Router>
+      <Router basename={process.env.PUBLIC_URL}>
         <div>
-        <Route exact path = {process.env.PUBLIC_URL + "/"} component = {Home} />
-        <Link className = "HOME" to = {process.env.PUBLIC_URL + "/"}><Button variant = "contained" color = "secondary">HOME</Button></Link>
-        <Route path = {process.env.PUBLIC_URL + "/login"} component = {login} />
-        <Route path = {process.env.PUBLIC_URL + "/sign_up"} component = {sign_up} />
-        <Route path = {process.env.PUBLIC_URL + "/profile"} component = {Profile}/>
+        <Route exact path = "/" component = {Home} />
+        <Link className = "HOME" to = "/"><Button variant = "contained" color = "secondary">HOME</Button></Link>
+        <Route path = "/login" component = {login} />
+        <Route path = "/sign_up" component = {sign_up} />
+        <Route path = "/profile" component = {Profile}/>
         </div>
       </Router>
     );
