@@ -1,0 +1,91 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 40vmin;
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes float-up {
+  0% {
+      opacity: 0;
+      top: 4rem;
+  }
+  100% {
+      opacity: 1;
+      top: 0;
+  }
+}
+
+.float-up {
+  opacity: 0;
+  position: relative;
+  animation-name: float-up;
+  animation-duration: 0.45s;
+  animation-fill-mode: forwards;
+}
+
+.center_content {
+  position: fixed;
+  left: 50%; /*move the top left point of block to the center*/
+  top: 50%;  /*move the top left point of block to the center*/
+  transform: translate(-50%, -50%); /*move the center of the block to center*/
+  width: 600px;
+  height: 450px;
+}
+.center{
+  position: fixed;
+  left: 50%; /*move the top left point of block to the center*/
+  top: 50%;  /*move the top left point of block to the center*/
+  transform: translate(-50%,-50%); /*move the center of the block to center*/
+}
+.login_btn{
+  position: fixed;
+  top:20px;
+}
+.test{
+  position: fixed;
+  width: 300px;
+}
+.info1{
+  position: fixed;
+  left: 50%; /*move the top left point of block to the center*/
+  top: 50%;  /*move the top left point of block to the center*/
+  transform: translate(-50%, -300%);
+}
+.info2{
+  position: fixed;
+  left: 50%; /*move the top left point of block to the center*/
+  top: 50%;  /*move the top left point of block to the center*/
+  transform: translate(-50%, -100%);
+}
+.HOME{
+  position: fixed;
+  left: 50%; /*move the top left point of block to the center*/
+  top: 1%;  /*move the top left point of block to the center*/
+  transform: translate(-50%,0%); /*move the center of the block to center*/
+}
