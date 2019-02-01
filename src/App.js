@@ -36,11 +36,14 @@ class login extends React.Component{
   }
   login()
   {
+    if(this.state.email && this.state.password)
+    {
     let data = JSON.stringify({
       email:this.state.email,
       password:this.state.password
     });
     submit("https://lkt-back-end.herokuapp.com/authen_and_autho/login",data);
+    }
   }
   notSubmit(e)
   {
@@ -86,6 +89,8 @@ class sign_up extends React.Component{
   }
   sign_up()
   {
+    if(this.state.email && this.state.username && this.state.password && this.state.confirm_password)
+    {
     if(this.state.password === this.state.confirm_password)
     {
     let data = JSON.stringify({
@@ -98,6 +103,7 @@ class sign_up extends React.Component{
     else
     {
       alert("Two passwords are not the same");
+    }
     }
   }
   notSubmit(e)
@@ -226,5 +232,4 @@ class App extends React.Component{
     );
   }
 }
-
 export default App;
