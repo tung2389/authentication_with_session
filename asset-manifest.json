@@ -1,0 +1,9 @@
+{
+  "main.css": "/authentication_with_session/static/css/main.5283d191.chunk.css",
+  "main.js": "/authentication_with_session/static/js/main.fe8eb171.chunk.js",
+  "static/js/1.8e7ccbe5.chunk.js": "/authentication_with_session/static/js/1.8e7ccbe5.chunk.js",
+  "runtime~main.js": "/authentication_with_session/static/js/runtime~main.f6cdb27f.js",
+  "index.html": "/authentication_with_session/index.html",
+  "precache-manifest.d30379ec1c23579d6cf5a630c80ce9e3.js": "/authentication_with_session/precache-manifest.d30379ec1c23579d6cf5a630c80ce9e3.js",
+  "service-worker.js": "/authentication_with_session/service-worker.js"
+}
