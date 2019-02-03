@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import './App.css';
 import {BrowserRouter as Router,Route,Link} from 'react-router-dom';
 import TextField from '@material-ui/core/TextField';
@@ -15,11 +15,9 @@ async function submit(url,data)
       'Content-Type': 'application/json',
     },
     body:data,
-    credentials:'include'
+    credentials:'include',
   }).then(res => res.text()
     .then(res => alert(res)));
-
-  //alert(notification);
 };
 
 class login extends React.Component{
@@ -28,13 +26,35 @@ class login extends React.Component{
     super(props);
     this.state = {
       email:undefined,
-      password:undefined
+      password:undefined,
+      is_log_in:false,
+      data:undefined
     };
     this.notSubmit = this.notSubmit.bind(this);
     this.change_form = this.change_form.bind(this);
     this.login = this.login.bind(this);
+    this.check_login = this.check_login.bind(this);
   }
-  login()
+  async check_login()
+  {
+    let res = await fetch("https://lkt-back-end.herokuapp.com/authen_and_autho/profile",{
+      method:'GET',
+      credentials:'include'
+    });
+    try
+    {
+      res = await res.json();
+      this.setState({is_log_in:true,data:res});
+    }
+    catch
+    {
+      this.setState({is_log_in:false});
+    }
+  }
+  componentDidMount(){
+    this.check_login();
+  }
+  async login()
   {
     if(this.state.email && this.state.password)
     {
@@ -42,7 +62,8 @@ class login extends React.Component{
       email:this.state.email,
       password:this.state.password
     });
-    submit("https://lkt-back-end.herokuapp.com/authen_and_autho/login",data);
+    await submit("https://lkt-back-end.herokuapp.com/authen_and_autho/login",data);
+    this.check_login();
     }
   }
   notSubmit(e)
@@ -55,6 +76,13 @@ class login extends React.Component{
   }
   render(){
     return(
+      (this.state.is_log_in)
+      ?
+      (
+        <Success_login data = {this.state.data}/>
+      )
+      :
+      (
       <div className = "float-up">
         <Paper elevation = {1} className = "center_content">
         <form className = "center" onSubmit =  {this.notSubmit} >
@@ -69,6 +97,7 @@ class login extends React.Component{
         </form>
         </Paper>
         </div>
+      )
     );
   }
 }
@@ -139,16 +168,7 @@ class sign_up extends React.Component{
   }
 }
 
-class Profile extends React.Component{
-  constructor(props)
-  {
-    super(props);
-    this.state = {
-      data:undefined
-    }
-    this.render_data = this.render_data.bind(this);
-    this.logout = this.logout.bind(this);
-  }
+class Success_login extends React.Component{
   render_data(data)
   {
     return(
@@ -160,6 +180,27 @@ class Profile extends React.Component{
       </div>
     );
   }
+  render(){
+    return(
+      <div>
+      {this.render_data(this.props.data)}
+      <div className = "center">
+      <Button type = "submit" color = "secondary" variant = "contained" onClick = {this.logout}>Log out</Button>
+      </div>
+      </div>
+      );
+    }
+}
+
+class Profile extends React.Component{
+  constructor(props)
+  {
+    super(props);
+    this.state = {
+      data:undefined
+    }
+    this.logout = this.logout.bind(this);
+  }
   logout(){
     fetch("https://lkt-back-end.herokuapp.com/authen_and_autho/logout",{
       method:'GET',
@@ -169,18 +210,20 @@ class Profile extends React.Component{
     this.setState({data:undefined});
   }
   async componentDidMount(){
-    try
-    {
     let res = await fetch("https://lkt-back-end.herokuapp.com/authen_and_autho/profile",{
       method:'GET',
       credentials:'include'
-    })
-    res = await res.json();
-    this.setState({data:res});
+    });
+    let res2 = await res.clone();
+    try
+    {
+      res2 = await res2.json();
+      this.setState({data:res2});
     }
     catch
     {
-      alert("You haven't logged in yet");
+      let res3 = await res.text();
+      alert(res3);
     }
   }
   render(){
@@ -188,20 +231,17 @@ class Profile extends React.Component{
       (this.state.data)
       ?
       (
-      <div>
-      {this.render_data(this.state.data)}
-      <div className = "center">
-      <Button type = "submit" color = "secondary" variant = "contained" onClick = {this.logout}>Log out</Button>
-      </div>
-      </div>
+        <Success_login data = {this.state.data} />
       )
       :
       (
-      <div className = "center">You haven't logged in yet</div>
+        <div className = "center">You haven't logged in yet</div>
       )
     );
   }
 }
+
+
 class Home extends React.Component{
   render(){
     return(
